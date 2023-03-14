@@ -13,10 +13,17 @@ public class InputController : MonoBehaviour
 
         if (Math.Abs(horizontalAxis) == 1)
         {
-            Player.Move(Vector2Int.right * horizontalAxis);
+            var movement = Vector2Int.right * horizontalAxis;
+            OnMove(movement);
         } else if (Math.Abs(verticalAxis) == 1)
         {
-            Player.Move(Vector2Int.up * verticalAxis);
+            var movement = Vector2Int.up * verticalAxis;
+            OnMove(movement);
         }
+    }
+
+    private void OnMove(Vector2Int movement)
+    {
+        Player.Move(movement);
     }
 }

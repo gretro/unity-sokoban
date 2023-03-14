@@ -13,14 +13,12 @@ namespace Assets.Scripts
         private Vector2 nextPosition;
         private Vector2Int? nextMovement;
 
-        public UnityEvent OnMove;
+        public UnityEvent<Vector2Int> OnMove;
 
         private void Start()
         {
             this.entity = gameObject.transform;
             this.nextPosition = this.entity.position;
-
-            Debug.Log($"Next Position: ({nextPosition.x}, {nextPosition.y})");
         }
 
         public void FixedUpdate()
@@ -32,7 +30,7 @@ namespace Assets.Scripts
 
                 if (canMove)
                 {
-                    MoveTo(desiredPosition);
+                    MoveTo(desiredPosition, nextMovement.Value);
                 } else
                 {
                     if (canPush)
@@ -41,7 +39,7 @@ namespace Assets.Scripts
                         if (maybeMovable != null && maybeMovable.CanMoveTo(nextMovement.Value).Item1)
                         {
                             maybeMovable.Move(nextMovement.Value);
-                            MoveTo(desiredPosition);
+                            MoveTo(desiredPosition, nextMovement.Value);
                         }
                     }
                 }
@@ -53,6 +51,9 @@ namespace Assets.Scripts
             {
                 var step = moveSpeed * Time.fixedDeltaTime;
                 entity.position = Vector2.MoveTowards(entity.position, nextPosition, step);
+            } else
+            {
+                this.OnMove.Invoke(Vector2Int.zero);
             }
         }
 
@@ -71,7 +72,7 @@ namespace Assets.Scripts
             }
 
             var collidingWith = Physics2D.OverlapPoint(positionToEvaluate);
-            if (collidingWith == null)
+            if (collidingWith == null || collidingWith.isTrigger)
             {
                 return (true, null);
             }
@@ -94,10 +95,10 @@ namespace Assets.Scripts
             }
         }
 
-        private void MoveTo(Vector2 nextPosition)
+        private void MoveTo(Vector2 nextPosition, Vector2Int movement)
         {
             this.nextPosition = nextPosition;
-            OnMove.Invoke();
+            OnMove.Invoke(movement);
         }
     }
 }
