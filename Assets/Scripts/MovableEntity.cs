@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Assets.Scripts
@@ -71,18 +72,18 @@ namespace Assets.Scripts
                 Debug.Log($"{entity.name}: Current position ({entity.position.x},{entity.position.y})");
             }
 
-            var collidingWith = Physics2D.OverlapPoint(positionToEvaluate);
-            if (collidingWith == null || collidingWith.isTrigger)
+            var collideInfo = Physics2D.OverlapPointAll(positionToEvaluate).FirstOrDefault(collide => !collide.isTrigger);
+            if (collideInfo == null)
             {
                 return (true, null);
             }
 
             if (this.debugCollisions)
             {
-                Debug.Log($"{entity.name} will collide with {collidingWith.name}.");
+                Debug.Log($"{entity.name} will collide with {collideInfo.name}.");
             }
 
-            return (false, collidingWith);
+            return (false, collideInfo);
         }
 
         public void Move(Vector2Int movement)
