@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,7 +9,9 @@ namespace Assets.Scripts
 {
     public class GameManager : MonoBehaviour
     {
-        private IObjective[] objectives = new IObjective[0];
+        public ObjectiveLayout objectiveLayout;
+        
+        private IObjective[] objectives = Array.Empty<IObjective>();
         private bool gameWon = false;
         private int playerMoves = 0;
 
@@ -48,10 +51,8 @@ namespace Assets.Scripts
 
         public void DiscoverObjectives()
         {
-            this.objectives = FindObjectsOfType<MonoBehaviour>().OfType<IObjective>().ToArray();
-            var objectiveNames = this.objectives.Select(obj => obj.ObjectiveName).ToArray();
-
-            Debug.Log($"Objectives discovered: {string.Join(", ", objectiveNames)}");
+            objectives = FindObjectsOfType<MonoBehaviour>().OfType<IObjective>().ToArray();
+            objectiveLayout.SetObjectives(objectives);
         }
 
         public void RestartLevel()
@@ -64,13 +65,14 @@ namespace Assets.Scripts
             if (movement != Vector2Int.zero)
             {
                 playerMoves++;
-                UpdateUI();
             }
+            
+            UpdateUI();
         }
 
         private void UpdateUI()
         {
-            Debug.Log($"Player moves: {playerMoves}. Objectives filled: {objectivesFilled}/{objectives.Length}");
+            objectiveLayout.UpdateUI();
         }
     }
 }
