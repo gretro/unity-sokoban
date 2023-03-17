@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb308aa5d8d84e9f8a78045022d3022, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectiveElementTemplate: {fileID: 9197481963319205126, guid: e11a91821209642cabf431ae0d232b4e, type: 3}
+  ObjectiveElementTemplate: {fileID: 9197481963319205126, guid: d9ea3a390e0bd4be486fccf1b428593b, type: 3}
   RestartLevel:
     m_PersistentCalls:
       m_Calls:

@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 
 public class ObjectiveLayout : MonoBehaviour
 {
+    public VisualTreeAsset ObjectiveElementTemplate;
     public UnityEvent RestartLevel;
     
     private UIDocument uiDocument;
@@ -32,7 +33,7 @@ public class ObjectiveLayout : MonoBehaviour
 
         objectiveElements = objectives.Select(objective =>
         {
-            var objectiveElement = new ObjectiveElement(objective);
+            var objectiveElement = new ObjectiveElement(ObjectiveElementTemplate, objective);
             objectivePanel.Add(objectiveElement);
 
             return objectiveElement;

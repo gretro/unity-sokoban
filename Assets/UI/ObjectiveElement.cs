@@ -14,13 +14,12 @@ public class ObjectiveElement : VisualElement
 
    public ObjectiveElement()
    {
-      var template = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/UI/ObjectiveElement.uxml");
-      template.CloneTree(this);
    }
 
-   public ObjectiveElement(IObjective objective)
-      :this()
+   public ObjectiveElement(VisualTreeAsset template, IObjective objective)
    {
+      template.CloneTree(this);
+      
       this.objective = objective;
       
       UpdateUI();
