@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
@@ -72,7 +71,7 @@ namespace Assets.Scripts
 
         private void UpdateUI()
         {
-            objectiveLayout.UpdateUI();
+            objectiveLayout.UpdateUI(playerMoves);
         }
     }
 }

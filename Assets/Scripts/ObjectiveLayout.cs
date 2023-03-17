@@ -1,55 +1,56 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Assets.Scripts;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 public class ObjectiveLayout : MonoBehaviour
 {
-    private const float POS_X = 50.0f;
-    private const float GAP_Y = 25.0f;
-    private const float INITIAL_GAP_Y = 50.0f;
+    public UnityEvent RestartLevel;
+    
+    private UIDocument uiDocument;
+    private VisualElement objectivePanel;
 
-    public GameObject objectiveUIPrefab;
+    private Label PlayerMoves => uiDocument.rootVisualElement.Q<Label>("PlayerMoves");
+    private Button RestartLevelBtn => uiDocument.rootVisualElement.Q<Button>("RestartLevelBtn");
 
-    private ObjectiveUI[] objectiveUIs = Array.Empty<ObjectiveUI>();
+    private ObjectiveElement[] objectiveElements;
 
-    public void SetObjectives(IObjective[] objectives)
+    private void Start()
     {
-        foreach (var objUI in objectiveUIs)   
-        {
-            Destroy(objUI);
-        }
+        uiDocument = GetComponent<UIDocument>();
 
-        objectiveUIs = new ObjectiveUI[objectives.Length];
-        for (var i = 0; i < objectives.Length; i++)
-        {
-            var ui = CreateObjectiveUI(i, objectives[i]);
-            objectiveUIs[i] = ui;
-        }
+        objectivePanel = uiDocument.rootVisualElement.Q<VisualElement>("ObjectivePanel");
+        RestartLevelBtn.clicked += RestartLevel.Invoke;
     }
 
-    public void UpdateUI()
+    public void SetObjectives(IEnumerable<IObjective> objectives)
     {
-        foreach (var objUI in objectiveUIs)
+        objectivePanel.Clear();
+
+        objectiveElements = objectives.Select(objective =>
         {
-            objUI.UpdateUI();
-        }
+            var objectiveElement = new ObjectiveElement(objective);
+            objectivePanel.Add(objectiveElement);
+
+            return objectiveElement;
+        }).ToArray();
     }
 
-    private ObjectiveUI CreateObjectiveUI(int index, IObjective obj)
+    public void UpdateUI(int playerMoves)
     {
-        var objective = Instantiate(objectiveUIPrefab, transform);
-        var objTransform = objective.GetComponent<RectTransform>();
-
-        var y = ((objTransform.rect.height + GAP_Y) * index + INITIAL_GAP_Y) * -1;
-        Debug.Log($"Creating Objective UI for objective: {obj.ObjectiveName} at Y: {y}");
-
-        objTransform.anchoredPosition = new Vector2(POS_X, y);
-
-        var ui = objective.GetComponent<ObjectiveUI>();
-        ui.objective = obj;
+        PlayerMoves.text = playerMoves.ToString();
         
-        ui.UpdateUI();
+        if (objectiveElements == null)
+        {
+            return;
+        }
         
-        return ui;
+        foreach (var objectiveElement in objectiveElements)
+        {
+            objectiveElement.UpdateUI();
+        }
     }
 }

@@ -1,0 +1,18 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="ObjectiveElement" src="project://database/Assets/UI/ObjectiveElement.uxml?fileID=9197481963319205126&amp;guid=d9ea3a390e0bd4be486fccf1b428593b&amp;type=3#ObjectiveElement" />
+    <Style src="project://database/Assets/UI/GameUIStyle.uss?fileID=7433441132597879392&amp;guid=33f15a086edca42c6b6564b691120333&amp;type=3#GameUIStyle" />
+    <ui:VisualElement name="Container" style="flex-grow: 1; justify-content: space-between; flex-direction: column;">
+        <ui:VisualElement name="ObjectivePanel" class="objective-panel" style="flex-grow: 1; flex-shrink: 1; width: 100px; align-items: flex-start; margin-top: 50px; margin-bottom: 50px;">
+            <ui:Instance template="ObjectiveElement" name="ObjectiveElement" />
+        </ui:VisualElement>
+        <ui:VisualElement name="FooterContainer" style="margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; flex-direction: row; justify-content: space-between; align-items: flex-end;">
+            <ui:VisualElement name="MovesContainer" class="moves-container" style="flex-direction: row; margin-left: 10px;">
+                <ui:Label text="Moves: " display-tooltip-when-elided="true" name="MovesLabel" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+                <ui:Label text="0" display-tooltip-when-elided="true" name="PlayerMoves" style="padding-left: 5px; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="ActionsContainer" style="flex-direction: row;">
+                <ui:Button text="Restart Level" display-tooltip-when-elided="true" enable-rich-text="false" name="RestartLevelBtn" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 5px; font-size: 16px; justify-content: center; -unity-font-style: bold;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

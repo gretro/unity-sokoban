@@ -1,0 +1,30 @@
+.objective-panel {
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 100px;
+    align-items: flex-start;
+}
+
+.objective-panel > * {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.moves-container {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: flex-end;
+    font-size: 18px;
+    -unity-font-style: bold;
+    color: rgba(255, 255, 255, 255);
+}
+
+.actions-container {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: flex-end;
+}
+
+.actions-container > .unity-button {
+    font-size: 24px;
+}

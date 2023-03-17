@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/ObjectiveElementStyles.uss?fileID=7433441132597879392&amp;guid=c6780fb43fbb5418588de5abbfb57de5&amp;type=3#ObjectiveElementStyles" />
+    <ui:GroupBox name="ObjectiveBox" focusable="false" class="objective-box" style="margin: 5px auto 25px auto; padding: 0;">
+        <ui:GroupBox name="ObjectiveImage" style="width: 50px; height: 50px; margin: 0; padding: 0; background-color: darkgrey;" />
+        <ui:GroupBox name="ObjectiveSuccess" tooltip="Done" class="objective-status" style="background-image: url(&apos;project://database/Assets/Sprites/sokoban_spritesheet@2.png?fileID=-6758586197777860436&amp;guid=8157dd3fb75d1ef41a92553bbb196930&amp;type=3#environment_10.png&apos;); display: none;" />
+        <ui:GroupBox name="ObjectivePending" tooltip="Not Completed" class="objective-status" style="background-image: url(&apos;project://database/Assets/Sprites/sokoban_spritesheet@2.png?fileID=-2889240064889191607&amp;guid=8157dd3fb75d1ef41a92553bbb196930&amp;type=3#environment_14.png&apos;);" />
+    </ui:GroupBox>
+</ui:UXML>

@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="ObjectiveElement" src="Assets/UI/ObjectiveElement.uxml"/>
+    <ui:Instance template="ObjectiveElement" />
+</ui:UXML>
